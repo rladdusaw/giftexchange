@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title_text %}Login Test{% endblock %}
+
+{% block header_text %}Login or Register{% endblock %}
+
+{% block content %}
+
+<div class="container col-md-4 col-md-offset-4">
+    {% if user.is_authenticated %}
+        <h3>Welcome, {{ user.get_username }}</h3>
+    {% else %}
+        <h3>Welcome, Anonymous User</h3>
+        <a href="{% url 'login_view' %}" id="id_login_button" class="btn btn-lg btn-default" role="button">Login</a>
+        <a href="{% url 'register' %}" id="id_register_button" class="btn btn-lg btn-default" role="button">Register</a>
+    {% endif %}
+    
+    {% if user.is_authenticated %}
+    <a href="{% url 'logout_view' %}" id="id_logout_button" class="btn btn-lg btn-default" role="button">Logout</a>
+    {% endif %}
+</div>
+
+{% endblock %}

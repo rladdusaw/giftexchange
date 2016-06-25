@@ -9,6 +9,6 @@ from . import views as home_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-	url(r'^$', home_views.HomeView.as_view(), name='home_view'),
+	url(r'^$', home_views.HomeView.as_view(), name='home'),
 	url(r'^accounts/', include(account_urls)),
 ]

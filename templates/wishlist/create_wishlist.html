@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+{% crispy new_wishlist new_wishlist.helper %}
+
+{% block title_text %}Wishlist Creation{% endblock %}
+
+{% block header_text %}Create a Wishlist{% endblock %}
+
+{% block content %}
+
+{% crispy form %}
+
+{% endblock %}

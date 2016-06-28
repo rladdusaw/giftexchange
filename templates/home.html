@@ -21,3 +21,11 @@
 </div>
 -->
 {% endblock %}
+
+{% block scripts %}
+    <script>
+        $(document).ready(function () {
+            $("#id_home_navbar").attr('class', 'active');
+        });
+    </script>
+{% endblock %}

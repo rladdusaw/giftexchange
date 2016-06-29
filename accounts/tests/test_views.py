@@ -8,7 +8,7 @@ class CreateTestUserMixin(object):
 
     def create_test_user(self):
         self.client.post(
-            '/authenticate/register/',
+            '/accounts/register/',
             data={
                 'username': 'test@email.com',
                 'password1': 'test',
@@ -19,7 +19,7 @@ class CreateTestUserMixin(object):
 
     def log_test_ueser_in(self):
         return self.client.post(
-            '/authenticate/login/',
+            '/accounts/login/',
             data={'username': 'test@email.com', 'password': 'test'},
             follow=True
         )
@@ -36,13 +36,13 @@ class HomeViewTest(CreateTestUserMixin, TestCase):
         self.log_test_ueser_in()
         response = self.client.get('/')
         self.assertTemplateUsed(response, 'home.html')
-        self.assertIn('Welcome, test@email.com', response.content)
+        self.assertIn(b'Welcome, test@email.com', response.content)
 
 
 class ErrorViewTest(TestCase):
 
     def test_error_url_resolves_to_error_page_view(self):
-        response = self.client.get('/authenticate/error/')
+        response = self.client.get('/accounts/error/')
         self.assertTemplateUsed(response, 'error.html')
 
 
@@ -53,25 +53,25 @@ class LogoutViewTest(CreateTestUserMixin, TestCase):
         self.log_test_ueser_in()
         response = self.client.get('/')
         self.assertContains(response, 'Welcome, test@email.com')
-        response = self.client.get('/authenticate/logout/', follow=True)
+        response = self.client.get('/accounts/logout/', follow=True)
         self.assertContains(response, 'Welcome, Anonymous User')
 
     def test_logout_view_returns_home_page(self):
         self.create_test_user()
         response = self.log_test_ueser_in()
-        self.assertContains(response, 'secret')
-        response = self.client.get('/authenticate/logout/', follow=True)
+        self.assertTemplateUsed(response, 'profile.html')
+        response = self.client.get('/accounts/logout/', follow=True)
         self.assertTemplateUsed(response, 'home.html')
 
 
 class RegistrationViewTest(CreateTestUserMixin, TestCase):
 
     def test_register_url_resolves_to_registration_view(self):
-        response = self.client.get('/authenticate/register/')
+        response = self.client.get('/accounts/register/')
         self.assertTemplateUsed(response, 'register.html')
 
     def test_registration_page_uses_user_creation_form(self):
-        response = self.client.get('/authenticate/register/')
+        response = self.client.get('/accounts/register/')
         self.assertIsInstance(response.context['form'], UserCreationForm)
 
     def test_valid_POST_requests_are_saved(self):
@@ -82,7 +82,7 @@ class RegistrationViewTest(CreateTestUserMixin, TestCase):
 
     def test_invalid_POST_requests_are_not_saved(self):
         self.client.post(
-            '/authenticate/register/',
+            '/accounts/register/',
             data={
                 'username': 'test@email.com',
                 'password1': 'test',
@@ -99,7 +99,7 @@ class RegistrationViewTest(CreateTestUserMixin, TestCase):
 class LoginViewTest(CreateTestUserMixin, TestCase):
 
     def test_login_url_resolves_to_login_view(self):
-        response = self.client.get('/authenticate/login/')
+        response = self.client.get('/accounts/login/')
         self.assertTemplateUsed(response, 'login.html')
 
     def test_valid_user_can_login_sucessfully(self):
@@ -114,4 +114,4 @@ class LoginViewTest(CreateTestUserMixin, TestCase):
         self.create_test_user()
         response = self.log_test_ueser_in()
         user = User.objects.filter(username='test@email.com')
-        self.assertTemplateUsed(response, 'secret.html')
+        self.assertTemplateUsed(response, 'profile.html')

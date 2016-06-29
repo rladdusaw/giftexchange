@@ -13,4 +13,5 @@ urlpatterns = [
 	url(r'^logout/$', account_views.LogoutView.as_view(), name='logout_view'),
 	url(r'^register/$', account_views.RegisterView.as_view(), name='register_view'),
 	url(r'^error/$', account_views.ErrorView.as_view(), name='error_view'),
+    url(r'^profile/$', account_views.ProfileView.as_view(), name='profile_view'),
 ]

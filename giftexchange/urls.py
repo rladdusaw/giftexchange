@@ -3,7 +3,8 @@
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from accounts import urls as account_urls
+from registration.backends.simple import urls as registrtation_urls
+
 from wishlist import urls as wishlist_urls
 
 from . import views as home_views
@@ -11,6 +12,12 @@ from . import views as home_views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 	url(r'^$', home_views.HomeView.as_view(), name='home'),
-	url(r'^accounts/', include(account_urls)),
+    url(
+        r'^accounts/register/$',
+        home_views.CustomRegistrationView.as_view(),
+        name='registration_register'
+    ),
+	url(r'^accounts/', include(registrtation_urls)),
     url(r'^wishlist/', include(wishlist_urls)),
+    url(r'^profile/$', home_views.ProfileView.as_view(), name='profile')
 ]

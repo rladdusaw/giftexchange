@@ -28,12 +28,19 @@
                     <li id="id_home_navbar">
                         <a href="{% url 'home' %}">Home</a>
                     </li>
+                    {% if not user.is_authenticated %}
                     <li id="id_login_navbar">
-                        <a href="{% url 'login_view' %}">Login</a>
+                        <a href="{% url 'auth_login' %}">Login</a>
                     </li>
+                    {% endif %}
                     <li id="id_profile_navbar">
-                        <a href="{% url 'register_view' %}">Register</a>
+                        <a href="{% url 'profile' %}">Profile</a>
                     </li>
+                    {% if user.is_authenticated %}
+                    <li id="id_logout_navbar">
+                        <a href="{% url 'auth_logout' %}">Logout</a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

@@ -15,3 +15,5 @@ class WishlistItem(models.Model):
     link = models.URLField(max_length=200)
     claimed = models.BooleanField(default=False)
     
+    def __str__(self):
+        return self.description

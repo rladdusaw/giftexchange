@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
-    'accounts',
     'wishlist',
 ]
 
@@ -133,4 +132,6 @@ STATICFILES_DIRS = (
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
-LOGIN_URL = '/profile/'
+LOGIN_URL = '/accounts/login'
+
+LOGIN_REDIRECT_URL = '/profile/'

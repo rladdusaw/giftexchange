@@ -14,6 +14,7 @@ class WishlistCreateView(LoginRequiredMixin, FormView):
     template_name = 'create_wishlist.html'
     form_class = WishlistForm
     success_url = '/profile/'
+    login_url = '/accounts/login/'
     
     def form_valid(self, form):
         wishlist = form.save(commit=False)
@@ -27,16 +28,12 @@ class WishlistDetailView(LoginRequiredMixin, CreateView, SingleObjectMixin):
     template_name = 'wishlist_detail.html'
     model = WishlistItem
     form_class = WishlistItemForm
+    login_url = '/accounts/login/'
     
-    def get_form_kwargs(self):
-        kwargs = super(WishlistDetailView, self).get_form_kwargs()
-        kwargs.update(self.kwargs)
-        return kwargs
         
     def get(self, request, current_list):
         wishlist = Wishlist.objects.get(id=current_list)
         wishlistitems = wishlist.wishlistitem_set.all()
-        print(wishlistitems)
         form = self.form_class
         return render(request, 'wishlist_detail.html', {'form': form, 'wishlist': wishlist})
     
@@ -49,3 +46,5 @@ class WishlistDetailView(LoginRequiredMixin, CreateView, SingleObjectMixin):
         return HttpResponseRedirect(
             '/wishlist/detail/%s/' % (self.kwargs['current_list'],)
         )
+        
+        

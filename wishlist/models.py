@@ -3,11 +3,8 @@ from django.db import models
 
 class Wishlist(models.Model):
     owner = models.ForeignKey(User)
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, blank=False)
     
-    def __str__(self):
-        return self.name
-        
     
 class WishlistItem(models.Model):
     wishlist = models.ForeignKey(Wishlist)
@@ -15,5 +12,3 @@ class WishlistItem(models.Model):
     link = models.URLField(max_length=200)
     claimed = models.BooleanField(default=False)
     
-    def __str__(self):
-        return self.description

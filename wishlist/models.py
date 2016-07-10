@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+
+
 class Wishlist(models.Model):
     owner = models.ForeignKey(User)
     name = models.CharField(max_length=50, blank=False)

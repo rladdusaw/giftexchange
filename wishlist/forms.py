@@ -1,8 +1,8 @@
 from django.forms import ModelForm
 
+from crispy_forms.bootstrap import FormActions, InlineField, StrictButton
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Field, Layout, Submit
-from crispy_forms.bootstrap import FormActions, InlineField, StrictButton
 
 from .models import Wishlist, WishlistItem
 

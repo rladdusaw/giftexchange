@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title_text %}Profile{% endblock %}
+
+{% block header_text %}Your Profile{% endblock %}
+
+{% block content %}
+    <div class="container col-md-4 col-md-offset-4">
+        <ul>
+        {% for wishlist in owner.wishlist_set.all %}
+            <li>{{wishlist.name}} <a href="{% url 'wishlist_detail' wishlist.id %}">View</a></li>
+        {% endfor %}
+            <li>Create a Wishlist <a href="{% url 'create_wishlist' %}">Create</a></li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(document).ready(function () {
+            $("#id_profile_navbar").attr('class', 'active');
+        });
+    </script>
+{% endblock %}

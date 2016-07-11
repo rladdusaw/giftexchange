@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+{% crispy new_wishlist new_wishlist.helper %}
+
+{% block title_text %}Profile{% endblock %}
+
+{% block header_text %}Your Profile{% endblock %}
+
+{% block content %}
+    <div class="container col-md-6 col-md-offset-4">
+        <ul>
+        {% for item in wishlist.wishlistitem_set.all %}
+            <li>{{item.description}} <a href="{{item.link}}">Link</a></li>
+        {% endfor %}
+        </ul>
+    </div>
+    <br>
+    {% crispy form %}
+{% endblock %}
+

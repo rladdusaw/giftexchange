@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title_text %}Login Test{% endblock %}
+
+{% block header_text %}Register{% endblock %}
+
+{% block content %}
+
+<div class="container col-md-4 col-md-offset-4">
+    <form action="." method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+            {{ field }}
+        {% endfor %}
+        <br>
+        <input class="btn btn-lg btn-default btn-block" type="submit" value="Submit" />
+    </form>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    $(document).ready(function () {
+        $("#id_username").attr('placeholder', '{{ form.username.label }}');
+        $("#id_username").attr('class', 'form-control');
+        $("#id_email").attr('placeholder', '{{ form.email.label }}');
+        $("#id_email").attr('class', 'form-control');
+        $("#id_password1").attr('placeholder', '{{ form.password1.label }}');
+        $("#id_password1").attr('class', 'form-control');
+        $("#id_password2").attr('placeholder', '{{ form.password2.label }}');
+        $("#id_password2").attr('class', 'form-control');
+    });
+    var form = '#registration-form';
+
+    $.ajax({
+        url: "{% url 'registration_register' %}",
+        type: "POST",
+        data: $(form).serialize(),
+        success: function(data) {
+            if (!(data['success'])) {
+                $(form).replaceWith(data['form_html']);
+            }
+            else {
+                $(form).find('.success-message').show();
+            }
+        },
+        error: function () {
+            $(form).find('.error-message').show()
+        }
+    });
+</script>
+
+{% endblock %}

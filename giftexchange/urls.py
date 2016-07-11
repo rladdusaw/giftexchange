@@ -21,5 +21,5 @@ urlpatterns = [
 	url(r'^accounts/', include(registrtation_urls)),
     url(r'^wishlist/', include(wishlist_urls)),
     url(r'^profile/$', home_views.ProfileView.as_view(), name='profile'),
-    url(r'^exchange/$', include(exchange_urls)),
+    url(r'^exchange/', include(exchange_urls)),
 ]

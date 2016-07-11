@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title_text %}Login Test{% endblock %}
+
+{% block header_text %}Login{% endblock %}
+
+{% block content %}
+
+<div class="container col-md-4 col-md-offset-4">
+    <form action="{% url 'auth_login' %}" method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+            {{ field }}
+        {% endfor %}
+        <br>
+        <input class="btn btn-lg btn-default btn-block" type="submit" value="Submit" />
+    </form>
+    <a class="btn btn-lg btn-default btn-block" href="{% url 'registration_register' %}">Register</a>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    $(document).ready(function () {
+        $("#id_login_navbar").attr('class', 'active');
+        $("#id_username").attr('placeholder', '{{ form.username.label }}');
+        $("#id_username").attr('class', 'form-control');
+        $("#id_password").attr('placeholder', '{{ form.password.label }}');
+        $("#id_password").attr('class', 'form-control');
+    });
+</script>
+
+{% endblock %}

@@ -62,6 +62,7 @@ TEMPLATES = [
             'templates',
             'templates/accounts',
             'templates/wishlist',
+            'templates/exchange',
         ],
         'APP_DIRS': True,
         'OPTIONS': {

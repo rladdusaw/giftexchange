@@ -2,7 +2,7 @@ from django.forms import ModelForm
 
 from crispy_forms.bootstrap import FormActions
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Div, Layout
+from crispy_forms.layout import Div, Layout, Submit
 
 from .models import Exchange, Participants
 
@@ -25,7 +25,7 @@ class ExchangeForm(ModelForm):
             Div(
                 'name',
                 FormActions(
-                    Submit('submit', 'Submit')
+                    Submit('submit', 'Create')
                 ),
                 css_class = 'container col-md-6 col-md-offset-4'
             ),

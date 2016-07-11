@@ -25,7 +25,7 @@ class WishlistForm(ModelForm):
             Div(
                 'name', 
                 FormActions(
-                    Submit('submit', 'Submit')
+                    Submit('submit', 'Create')
                 ),
                 css_class='container col-md-6 col-md-offset-4'
             ),

@@ -10,6 +10,7 @@ from .models import Wishlist, WishlistItem
 
 
 class WishlistForm(ModelForm):
+    """Uses crispy forms helper to format the wishlist creation form"""
     class Meta:
         model = Wishlist
         fields = ['name']
@@ -37,6 +38,7 @@ class WishlistForm(ModelForm):
         
 
 class WishlistItemForm(ModelForm):
+    """Uses crispy forms helper to format the item creation form"""
     class Meta:
         model = WishlistItem
         fields = ['description', 'link']

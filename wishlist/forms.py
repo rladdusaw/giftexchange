@@ -1,3 +1,5 @@
+# /wishlist/forms.py
+
 from django.forms import ModelForm
 
 from crispy_forms.bootstrap import FormActions, InlineField, StrictButton

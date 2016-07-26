@@ -1,3 +1,5 @@
+# /giftexchange/views.py
+
 from django.template.context_processors import csrf
 from django.http import HttpResponse
 from django.shortcuts import render, redirect

@@ -19,7 +19,20 @@ class ExchangeCreateView(LoginRequiredMixin, FormView):
         user = User.objects.get(id=request.user.id)
         exchange_list = Exchange.objects.filter(owner=user)
         form = self.form_class
-        return render(request, 'create_exchange.html', {'form': form, 'exchange_list': exchange_list})
+        return render(
+            request,
+            'create_exchange.html',
+            {'form': form, 'exchange_list': exchange_list}
+        )
+        
+    def post(self, request, *args, **kwargs):
+        user = User.objects.get(id=request.user.id)
+        exchange_list = Exchange.objects.filter(owner=user)
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
     
     def form_valid(self, form):
         exchange = form.save(commit=False)
@@ -27,7 +40,8 @@ class ExchangeCreateView(LoginRequiredMixin, FormView):
         exchange.save()
         return HttpResponseRedirect(self.get_success_url())
     
-
+        
+    
 class ExchangeDetailView(LoginRequiredMixin, CreateView, SingleObjectMixin):
     template_name = 'exchange_detail.html'
     model = Exchange

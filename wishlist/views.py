@@ -47,4 +47,3 @@ class WishlistDetailView(LoginRequiredMixin, CreateView, SingleObjectMixin):
             '/wishlist/detail/%s/' % (self.kwargs['current_list'],)
         )
         
-        
